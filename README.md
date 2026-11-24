@@ -3,203 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRISON BREAKOUT — Jogo 2D</title>
+    <title>Prison Breakout</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="cabecalho">
+
+    <!-- Topo / Apresentação -->
+    <header class="topo">
         <h1>PRISON BREAKOUT</h1>
-        <p class="subtitulo">Atravesse as 3 alas de segurança máxima e encontre uma maneira de escapar!</p>
+        <p>Você está preso e precisa escapar por 3 alas da prisão sem ser pego pelos guardas.</p>
+        <div class="botoes">
+            <a href="#jogo" class="btn-jogar" onclick="reiniciarJogo()">Jogar Agora</a>
+            <a href="#como-jogar" class="btn-tutorial">Como Jogar</a>
+        </div>
     </header>
 
-    <main class="container">
-        <div class="area-jogo">
-            <canvas id="gameCanvas" width="800" height="450"></canvas>
-        </div>
-
-        <section class="painel-info">
-            <div class="card">
-                <h2>Como Jogar</h2>
-                <p>
-                    Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> ou as <strong>Setas do Teclado</strong> para movimentar o prisioneiro pela cela.
-                </p>
-                <ul class="lista-regras">
-                    <li><strong>Objetivo:</strong> Pegue a chave dourada para destrancar as grades e saia pelo topo.</li>
-                    <li><strong>Cuidado:</strong> Os guardas perseguem você e aceleram quando o alarme toca! Use os móveis como cobertura.</li>
-                    <li><strong>Segredo Nível 3:</strong> Encoste no símbolo do <strong>IFSP</strong> para congelar os guardas por 2 segundos.</li>
-                    <li><strong>Atalhos:</strong> <kbd>ESPAÇO</kbd> inicia e <kbd>R</kbd> reinicia a partida.</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2>Equipe de Desenvolvimento</h2>
-                <p class="descricao-turma">Projeto Integrador — IFSP Campus Itapetininga</p>
-                <ul class="lista-equipe">
-                    <li>
-                        <span class="nome">Pietro</span>
-                        <span class="papel">Programação de Lógica e Física</span>
-                    </li>
-                    <li>
-                        <span class="nome">Wendel</span>
-                        <span class="papel">Game Design e Arte Digital</span>
-                    </li>
-                    <li>
-                        <span class="nome">Luiz Miguel</span>
-                        <span class="papel">Programação de Estado e Interface</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
+    <!-- Tela do Jogo -->
+    <main id="jogo" class="secao-jogo">
+        <canvas id="gameCanvas" width="800" height="450"></canvas>
     </main>
 
+    <!-- Tutorial Simples -->
+    <section id="como-jogar" class="tutorial">
+        <h2>Como Jogar (Tutorial)</h2>
+        <p><strong>1. Movimentar:</strong> Use as teclas <strong>W, A, S, D</strong> ou as <strong>Setas</strong> do teclado.</p>
+        <p><strong>2. Abrir a cela:</strong> Pegue a <strong>chave dourada</strong> no chão e corra até a saída no topo.</p>
+        <p><strong>3. Despistar os guardas:</strong> Não encoste nos guardas! Use os móveis para bloquear o caminho deles.</p>
+        <p><strong>4. Bônus do Nível 3:</strong> Passe por cima do símbolo do <strong>IFSP</strong> para congelar os guardas por 2 segundos.</p>
+        <p><strong>Reiniciar:</strong> Se for capturado ou vencer, aperte <strong>R</strong> para jogar de novo.</p>
+    </section>
+
+    <!-- Créditos -->
     <footer class="rodape">
-        <p>Desenvolvido com HTML5, CSS3 e JavaScript (Canvas API) • 2026</p>
+        <p><strong>Desenvolvido por:</strong> Pietro (Lógica e Física) • Wendel (Design e Arte) • Luiz Miguel (Interface)</p>
+        <p>IFSP Campus Itapetininga — 2026</p>
     </footer>
 
     <script src="game.js"></script>
 </body>
 </html>
 
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #121316;
-    color: #f1f3f5;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    line-height: 1.6;
-}
-
-.cabecalho {
-    padding: 25px 15px 15px;
+    background-color: #151515;
+    color: #eeeeee;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     text-align: center;
 }
 
-.cabecalho h1 {
+/* Topo / Landing Page */
+.topo {
+    max-width: 700px;
+    margin: 30px auto 20px;
+    padding: 0 15px;
+}
+
+.topo h1 {
     color: #e63946;
-    font-size: 2.4rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    text-shadow: 0 2px 10px rgba(230, 57, 70, 0.4);
+    font-size: 36px;
+    margin-bottom: 10px;
 }
 
-.subtitulo {
-    color: #adb5bd;
-    font-size: 1rem;
-    margin-top: 6px;
+.topo p {
+    color: #cccccc;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
-.container {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 10px;
+.botoes {
+    margin-bottom: 10px;
 }
 
-.area-jogo {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 24px;
+.btn-jogar, .btn-tutorial {
+    display: inline-block;
+    padding: 10px 22px;
+    margin: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.btn-jogar {
+    background-color: #e63946;
+    color: white;
+}
+
+.btn-jogar:hover {
+    background-color: #c1121f;
+}
+
+.btn-tutorial {
+    background-color: #2b2b2b;
+    color: white;
+    border: 1px solid #555555;
+}
+
+.btn-tutorial:hover {
+    background-color: #3a3a3a;
+}
+
+/* Canvas do Jogo */
+.secao-jogo {
+    margin: 20px auto;
 }
 
 canvas {
-    background-color: #26282b;
-    border: 3px solid #dee2e6;
-    border-radius: 6px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    max-width: 100%;
-    height: auto;
+    background-color: #303030;
+    border: 3px solid white;
+    max-width: 95%;
 }
 
-.painel-info {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.card {
-    background-color: #1b1d22;
-    border: 1px solid #2e323b;
-    border-radius: 8px;
+/* Tutorial */
+.tutorial {
+    max-width: 760px;
+    margin: 30px auto;
     padding: 20px;
+    background-color: #1f1f1f;
+    border: 1px solid #333333;
+    border-radius: 6px;
     text-align: left;
 }
 
-.card h2 {
-    color: #ff4d4d;
-    font-size: 1.25rem;
-    margin-bottom: 12px;
-    border-bottom: 1px solid #2e323b;
-    padding-bottom: 8px;
+.tutorial h2 {
+    color: #e63946;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 22px;
 }
 
-.lista-regras {
-    margin-top: 12px;
-    padding-left: 18px;
-    color: #ced4da;
-    font-size: 0.92rem;
+.tutorial p {
+    margin: 10px 0;
+    font-size: 15px;
+    line-height: 1.5;
 }
 
-.lista-regras li {
-    margin-bottom: 8px;
-}
-
-kbd {
-    background-color: #2b2f38;
-    border: 1px solid #495057;
-    border-bottom-width: 3px;
-    border-radius: 4px;
-    color: #ffd60a;
-    font-family: monospace;
-    font-size: 0.9rem;
-    font-weight: bold;
-    padding: 2px 6px;
-}
-
-.descricao-turma {
-    color: #868e96;
-    font-size: 0.88rem;
-    margin-bottom: 12px;
-}
-
-.lista-equipe {
-    list-style: none;
-}
-
-.lista-equipe li {
-    background-color: #14161a;
-    border-left: 3px solid #e63946;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    padding: 8px 12px;
-}
-
-.lista-equipe .nome {
-    display: block;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.lista-equipe .papel {
-    display: block;
-    font-size: 0.85rem;
-    color: #adb5bd;
-}
-
+/* Rodapé */
 .rodape {
-    text-align: center;
-    color: #6c757d;
-    font-size: 0.85rem;
-    padding: 15px;
-    border-top: 1px solid #1f2228;
-}
-
-@media (max-width: 720px) {
-    .painel-info {
-        grid-template-columns: 1fr;
-    }
+    margin: 30px 0 20px;
+    color: #999999;
+    font-size: 13px;
 }
